@@ -4,9 +4,9 @@ header('Content-Type: application/json');
 // 数据库配置
 $config = [
     'host'     => 'localhost',
-    'dbname'   => 'sauth',
-    'user'     => 'a123456!',
-    'password' => 'a123456!'
+    'dbname'   => 'xxxxxx',
+    'user'     => 'xxxxxx',
+    'password' => 'xxxxxx'
 ];
 
 try {
