@@ -3,6 +3,9 @@
 ## 项目简介
 本项目是一个用于获取API小号的Web框架，支持从数据库中获取数据并记录访问信息。通过API接口，用户可以获取数据，同时系统会记录访问者的IP地址、访问时间以及访问次数。如果IP被封禁（`status = 1`），则无法获取数据。
 
+## 项目提示
+这个php项目不包含验证部分，请自行添加验证以及登录部分！
+
 ## 环境要求
 - **MySQL**: 5.7.x
 - **Nginx**: 1.15
@@ -75,6 +78,24 @@ json
 "message": "系统错误: Database connection failed"
 }
 
-## 其他问题
-如有其他问题，请联系：
+## 构建数据库
+在MySQL中执行以下SQL语句以创建所需的表结构：
+```sql
+CREATE TABLE user_data (
+    ID INT PRIMARY KEY AUTO_INCREMENT,
+    IP VARCHAR(45) NOT NULL,
+    get_time DATETIME DEFAULT CURRENT_TIMESTAMP,
+    status TINYINT DEFAULT 0,
+    count INT DEFAULT 0
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+CREATE TABLE account (
+    ID INT PRIMARY KEY AUTO_INCREMENT,
+    data VARCHAR(9999) NOT NULL,
+    is_deleted TINYINT DEFAULT 0
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+```
+
+## 数据定制
+如有其他问题，定制功能请联系：
 - **QQ**: 1811144677
