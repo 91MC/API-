@@ -1,18 +1,80 @@
-# API-Web page acquisition framework
-API小号获取  API trumpet acquisition
-搭建环境：Mysql5.7.x  Nginx1.15  PHP7.3+   Building: Mysql5.7.x Nginx1.15 PHP7.3+
+# API-Web Page Acquisition Framework
 
+## 项目简介
+本项目是一个用于获取API小号的Web框架，支持从数据库中获取数据并记录访问信息。通过API接口，用户可以获取数据，同时系统会记录访问者的IP地址、访问时间以及访问次数。如果IP被封禁（`status = 1`），则无法获取数据。
 
-===============
-|常见报错列表：|
-===============
-|status |1| IP封禁|
-|status |2| 没有可用数据|
-|status |3| 数据库错误|
-|status |4| 系统错误|
-===============
+## 环境要求
+- **MySQL**: 5.7.x
+- **Nginx**: 1.15
+- **PHP**: 7.3+
 
-===============
-其他问题可联系
-QQ：1811144677
-===============
+## 搭建步骤
+1. **克隆项目**:
+2. **配置数据库**:
+   - 创建数据库并导入表结构（参考`create_tables.sql`）。
+   - 修改`api.php`中的数据库配置：
+     ```php
+     $config = [
+         'host'     => 'localhost',
+         'dbname'   => 'your_database',
+         'user'     => 'db_user',
+         'password' => 'db_password'
+     ];
+     ```
+3. **配置Web服务器**:
+   - 将项目部署到Nginx或Apache服务器。
+   - 确保PHP已安装并支持PDO扩展。
+
+4. **访问API**:
+   - 通过浏览器或工具访问`api.php`，例如：
+     ```
+     http://xxxx/api.php
+     ```
+
+## 错误代码说明
+| status | 描述               |
+|--------|--------------------|
+| 1      | IP被封禁           |
+| 2      | 没有可用数据       |
+| 3      | 数据库错误         |
+| 4      | 系统错误           |
+
+## 示例响应
+### 成功获取数据
+json
+{
+"status": 0,
+"data": "测试数据1"
+}
+
+### IP被封禁
+json
+{
+"status": 1,
+"message": "IP被封禁，无法获取数据"
+}
+
+### 没有可用数据
+json
+{
+"status": 2,
+"message": "没有可用数据"
+}
+
+### 数据库错误
+json
+{
+"status": 3,
+"message": "数据库错误: SQLSTATE[HY000]: General error: 1442 ..."
+}
+
+### 系统错误
+json
+{
+"status": 4,
+"message": "系统错误: Database connection failed"
+}
+
+## 其他问题
+如有其他问题，请联系：
+- **QQ**: 1811144677
